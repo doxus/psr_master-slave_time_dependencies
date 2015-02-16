@@ -3,6 +3,8 @@ Celem niniejszej pracy jest zobrazowanie zależności w przesyłach danych, mię
 
 \section{Budowa i działanie sieci Master - Slave}
 W sieciach opartych o model komunikacyjny Master - Slave, można wyróżnić wiele stacji typu slave, oraz jedną stację master. Jedynie stacja master może swobodnie wysyłać i żądać dane od innych stacji. Slave natomiast jeśli potrzebuje jakiejś informacji, której transmisja nie została przewidziana na etapie projektowania sieci musi skorzystać z tzw. wymiany wyzwalanej (na które dodatkowo należy wziąć poprawkę przy projektowaniu wymian w sieci).
+
 	\subsection{Scenariusz wymian}
 	Ze względu na swój sposób działania sieć master - slave daje nam ogromny zakres kontroli nad wymianami danych zachodzącymi w sieci. Jest tak, ponieważ każdą z nich trzeba samemu zaplanować - robi się to za pomocą tzw. \textit{scenariusza wymian}, projektowanego równolegle z siecią.\\
-	W scenariuszu znaleźć się muszą wszystkie wymiany, których dokonanie w określonym okresie czasu jest niezbędne dla poprawnego działania systemu (oraz spełniania przez niego wymagań czasowych).
+	W scenariuszu znaleźć się muszą wszystkie wymiany, których dokonanie w określonym okresie czasu jest niezbędne dla poprawnego działania systemu (oraz spełniania przez niego wymagań czasowych).\\
+	Jako, że nie wszystko można przewidzieć na etapie projektowania, a z czasem wymagania poszczególnych stacji slave mogą ulec zmianie, dodany został mechanizm tzw. \textit{wymian wyzwalanych}. Jest to wymiana, którą może zainicjować stacja slave w pakiecie odpowiedzi - informuje ona stację slave, że potrzebuje określone dane, a master z czasem je jej dostarczy. Projektując scenariusz wymian należy wziąć pod uwagę pozostawienie pewnego "zapasu" wolnego czasu między \textit{czasem wymian} a \textit{maksymalnym cyklem sieci}.
