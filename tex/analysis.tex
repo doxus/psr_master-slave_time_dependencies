@@ -12,3 +12,6 @@ W \textit{cyklu sieci} wyróżnić można pojedyncze \textit{wymiany}, które na
 		\item Czas oczekiwania przez stację master na odpowiedź od stacji podrzędnej - $ T_{ODP} $
 		\item Czas oczekiwania na gotowość stacji nadrzędnej -  $ T_{GOT} $
 	\end{itemize}
+	Rozważmy, co się stanie, jeśli powyższe czasy zostaną źle dobrane. \\ Za krótki czas $ T_{GOT} $ będzie powodował, że stacja slave notorycznie będzie zgłaszała brak gotowości stacji master i niemożność zrealizowania wymiany. \\
+	Za krótki czas $ T_{ODP} $ będzie z kolei powodował częste komunikaty stacji master o braku połączenia ze stacją slave. \\
+	Co więcej, powyższe parametry warto dobrać z pewnym marginesem, zabezpieczających nas od wszelakich opóźnień mogących wystąpić na etapie transmisji, bądź przetwarzania danych na granicy Jednostki Centralnej i Koprocesora Sieci.
