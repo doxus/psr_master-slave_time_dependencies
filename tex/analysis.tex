@@ -20,8 +20,14 @@ W \textit{cyklu sieci} wyróżnić można pojedyncze \textit{wymiany}, które na
 	Przede wszystkim jednostka centralna stacji master przekazuje do koprocesora informacje jakie żądanie musi zostać zrealizowane. Po zakończeniu cyklu automatu master musi zostać przygotowana ramka żądania, bo przecież abonent docelowy musi zostać zaadresowany, należy zapewnić kontrolę poprawności danych sumą CRC itp. Określimy ten czas jako $ T_{PZ} $. \\
 	Przygotowaną ramkę, należy przesłać łączem fizycznym do abonenta docelowego - czas przesyłu jest bezpośrednio związany z właściwością łącza i ustaloną prędkością transmisji danych. Czas propagacji danych po łączu określimy jako $ T_{TRANS1} $. Po wysłaniu ramki przez stację master, koprocesor docelowej stacji slave musi wykryć tą ramkę, i odczytać jej adres, bo przecież wcale nie musi być celem transmisji - jest to czas detekcji ramki $ T_{DZ} $. Po ustaleniu przez koprocesor, że przesłane żądanie ma być zrealizowane, należy żądanie przeanalizować, i poinformować jednostkę centralną jakie działania ma podjąć, bądź też jakie dane przygotować do transmisji - określmy ten czas jako $ T_{AZ} $. Po przekazaniu danych do jednostki centralnej musi się wykonać cykl automatu stacji slave, w którym dane zostaną przygotowane do transmisji do mastera, bądź zostanie wykonana czynność nakazana w otrzymanym żądaniu - czas cyklu można określić jako $ T_{CS} $. 
 	\\Po cyklu automatu następuje jakby "odwrócenie" procesu - stacja slave przygotowuje ramkę odpowiedzi, a master będzie ją odbierał. W skład tego procesu wejdą następujące czasy: czas przygotowania ramki odpowiedzi - $ T_{PO} $, czas transmisji ramki odpowiedzi - $ T_{TRANS2} $, czas detekcji ramki odpowiedzi - $ T_{DO} $, czas analizy ramki odpowiedzi - $ T_{AO} $ i wreszcie czas cyklu automatu stacji master, w którym nastąpi przetworzenie odpowiedzi oraz zapisanie informacji o wymianie zakończonej sukcesem do raportu - $ T_{CM} $.\\
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.7\textwidth]{./img/wymiana.jpg}
+		\caption{Przebieg poszczególnych procesów podaczas pojedynczej wymiany}
+		\label{fig:wymiana}
+	\end{figure}
 	\\
-	Warto pamiętać, że muszą zachodzić następujące zależności:
+	Warto pamiętać, że dla poprawnej pracy sieci powinny zachodzić następujące zależności:
 	\begin{equation}
 		\label{eq:zalTgot}
 		T_{GOT} > T_{DET1} + T_{AZ} + T_{CS} + T_{PO}
