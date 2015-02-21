@@ -1,4 +1,4 @@
-\section{Podstawowe parametry czasowe}
+\section{Podstawowe parametry czasowe {\Huge SPRAWDZIĆ POPRAWNOŚĆ CYKLU WYMIAN}}
 Podstawowym parametrem jest długość trwania tzw. \textit{cyklu wymian} czyli odcinka czasu, na którym pojawią się wszystkie wymiany konieczne dla sprawnego działania systemu. Jest on zazwyczaj ograniczony od góry wymaganiami czasowymi, jakie musi spełniać system aby kwalifikował się jako system czasu rzeczywistego.\\
 W \textit{cyklu sieci} wyróżnić można pojedyncze \textit{wymiany}, które należą zazwyczaj do jednej z następujących kategorii:
 \begin{itemize}
@@ -9,9 +9,11 @@ W \textit{cyklu sieci} wyróżnić można pojedyncze \textit{wymiany}, które na
 	\subsection{Przebieg pojedynczej wymiany}
 	Aby dowiedzieć się ile trwa cykl wymiany między stacją master a stacją slave, należy szczegółowo przeanalizować z jakich etapów składa się cykl wymiany i jak w wyniku tego należy sieć skonfigurować alby działała stabilnie i niezawodnie. Dwa podstawowe parametry, które mają na to wpływ to:
 	\begin{itemize}
-		\item Czas oczekiwania przez stację master na odpowiedź od stacji podrzędnej - $ T_{ODP} $
+		\item Czas oczekiwania przez stację master na odpowiedź od stacji podrzędnej - $ T_{OODP} $
 		\item Czas oczekiwania na gotowość stacji nadrzędnej -  $ T_{GOT} $
 	\end{itemize}
 	Rozważmy, co się stanie, jeśli powyższe czasy zostaną źle dobrane. \\ Za krótki czas $ T_{GOT} $ będzie powodował, że stacja slave notorycznie będzie zgłaszała brak gotowości stacji master i niemożność zrealizowania wymiany. \\
-	Za krótki czas $ T_{ODP} $ będzie z kolei powodował częste komunikaty stacji master o braku połączenia ze stacją slave. \\
-	Co więcej, powyższe parametry warto dobrać z pewnym marginesem, zabezpieczających nas od wszelakich opóźnień mogących wystąpić na etapie transmisji, bądź przetwarzania danych na granicy Jednostki Centralnej i Koprocesora Sieci.
+	Za krótki czas $ T_{OODP} $ będzie z kolei powodował częste komunikaty stacji master o braku połączenia ze stacją slave. \\
+	Co więcej, powyższe parametry warto dobrać z pewnym marginesem, zabezpieczających nas od wszelakich opóźnień mogących wystąpić na etapie transmisji, bądź przetwarzania danych na granicy Jednostki Centralnej i Koprocesora Sieci.\\
+	\\
+	
