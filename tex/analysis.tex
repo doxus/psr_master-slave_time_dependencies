@@ -37,3 +37,15 @@ W \textit{cyklu sieci} wyróżnić można pojedyncze \textit{wymiany}, które na
 		T_{OODP} > T_{PZ} + T_{TRANS1} + T_{DET1} + T_{AZ} + T_{CS} + T_{PO} + T_{TRANS2} + T_{DO}
 	\end{equation}
 	Warto zwrócić uwagę na fakt, że w przypadku braku sygnału \textit{końca cyklu $ KC $} w czasie $ T_{GOT} $ koprocesor stacji slave wyśle odpowiedź $ NACK $ powodując uznanie wymiany za nieudaną. Jest to o tyle ważne, że wpływ na to ma czas trwania cyklu automatu slave $ T_{CS} $, którego długości nie da się wyliczyć, a jedynie zmierzyć. Dodatkowo będzie ona się prawdopodobnie zmieniała w zależności od działań podejmowanych przez stację slave, przez co może się drastycznie zmienić w wyniku komunikatów nadanych przez sieć. Takie zdarzenie może zaburzyć działanie sieci - dlatego należy doliczyć pewien margines w stosunku do przewidywanego najdłuższego czasu cyklu.
+	\begin{equation}
+		\label{eq:czasTrz}
+		T_{TR} = \frac{ZT*BT + BS}{P_{TR}}
+	\end{equation}
+	\begin{equation}
+		\label{eq:czasTz}
+		T_{TZ} = \frac{ZTZ*BZ + BS}{V}
+	\end{equation}
+	\begin{equation}
+		\label{eq:czasTo}
+		T_{TO} = \frac{ZTO*BZ+BS}{V}
+	\end{equation}
