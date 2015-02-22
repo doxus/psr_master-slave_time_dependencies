@@ -49,3 +49,19 @@ W \textit{cyklu sieci} wyróżnić można pojedyncze \textit{wymiany}, które na
 		\label{eq:czasTo}
 		T_{TO} = \frac{ZTO*BZ+BS}{V}
 	\end{equation}
+	\begin{equation}
+		\label{eq:czasPW}
+		T_{WI} = T_{PZ}+T_{TRANS1} + T_{DZ} + T_{AZ} + T_{CS} + T_{PO} + T_{TRANS2} + T_{DO} + T_{AD} + T_{CM}
+	\end{equation}
+	\begin{equation}
+		\label{eq:czasWW}
+		T_{WC} = \sum\limits_{i=1}^N T_{WIi} = \sum\limits_{i=1}^N (T_{PZi} + T_{TRANS1i}) + \sum\limits_{j=1}^N ( + T_{AZj} + T_{CSj} + T_{POj} + T_TRANS2j}) + \sum\limits_{i=1}^N (T_{CMi}+T_{T_{AOi}) + 2NT_{DO}
+	\end{equation}
+	\begin{equation}
+		\label{eq:czasPO}
+		T_{POW} = \sum\limits_{i=1}^N L_{Ri}*T_{TRANS1i} + L_{A}T_{ODDP}
+	\end{equation}
+	\begin{equation}
+		\label{eq:czasMAX}
+		T_{WM} = T_{WC} + T_{POW}
+	\end{equation}
