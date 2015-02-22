@@ -93,6 +93,20 @@ W \textit{cyklu sieci} wyróżnić można pojedyncze \textit{wymiany}, które na
 		\\
 		\\
 		Drugą wspomnianą czynnością edycji sieci jest usuwanie abonenta z niej. Ten mechanizm jest bardzo potrzebny żeby sieć działała cały czas sprawnie. Najczęstszym powodem usuwania abonenta z obiegu jest nie uzyskanie od niego odpowiedzi na wysłanego do niego zapytania. Spowodowane to może być błędami związanymi z transmisją albo po prostu uszkodzeniem abonenta. W protokole MASTER-SLAVE także wymyślony sposób usuwania nieobecnych slave'ów. Najpowszechniejszym rozwiązaniem jest ustalenie dwóch ważnych parametrów o których wcześniej wspominałem. Pierwszy z nich  to maksymalna liczba cykli sieci przy braku odpowiedzi. Przed ponownym wysłaniem ramki żądania do slave'a zostanie odczekana pewna liczba cykli sieci. Parametr ten poprawia znaczącą jakość działania sieci, ponieważ nie traci za każdym razem czasu na odpytywanie niedziałającego slave'a. Drugim parametrem jest ilość prób nawiązania łączności. Dzięki niemu po określonym czasie abonent zostanie po prostu wyrzucony z sieci (tzw. autousuwanie).
+	\subsection{Poprawa parametrów sieci}
+		Częstym zadaniem projektantów sieci jest poprawa parametrów od których zależy jej działanie. Tutaj można wyróżnić dwa sposby poprawy parametrów:
+		\begin{itemize}
+			\item zwiększenie transmisji danych
+			\item skrócenie cyklu automatu
+		\end{itemize}
+		Pierwsze rozwiązanie jest najprostsze ale nie zawsze skuteczne. Można to osiągnąć przez zwiększenie szybkości nadawania przez urządzenie albo po przez zwiększenie przepustowości łącza fizycznego. Niestety jest większe ryzyko wystąpienia błędów w takiej transmisji.
+		\\
+		Drugi sposób jest znacznie lepszy, ponieważ nie ma zagrożeń wynikających z poprawy tego parametru. Ale jego poprawa wymaga dużo więcej czasu na analizę samego problemu. Optymalizacja kodu przez programistów lub wykorzystanie skuteczniejszych algorytmów może znacznie skrócić czas cyklu automatu.
+		\\
+		Wymienione wyżej metody powinny poprawić parametry sieci. Ale co jeżeli wystąpią uszkodzenia linii danych albo uszkodzenia pewnych portów wejścia/wyjścia? W wyniku takich okoliczności system traci i możliwe jest, że przestanie działać prawidłowo taka sieć. Nawet najszybsza naprawa nie uchroni właściciela sieci od strat wynikających z braku działania sieci. Należy się na takie okoliczności zabezpieczyć i zastosować redundancje. Przykładowo dodatkowa linia danych może być bardzo dobrym zabezpieczeniem w razie awarii tej pierwszej. Ale niestety wiąże się to z kosztami. Nie tylkozakupu ale także konserwacji takiej redundantnej linii. Jeżeli byłaby nieużywana w czasie działania pierwszej linii można by było pomyśleć, że jest to strata pieniędzy. Na szczęście projektant jest wstanie wykorzystać od razu drugą linie danych do zwiększenia przepustowości łącza. A jedynie w czasie awarii wykorzystywana byłaby tylko jedna linia danych. Należy więc się zastanowić jakie elementy warto powielać
+		
 \section{Wnioski}
-		Sieci używające protokół MASTER-SLAVE to idealne rozwiązanie dla tych projektantów, którzy lubią mieć dużą kontrole nad wykonywanym projektem. Jej zalety takie jak prostota oraz uniwersalność sprawiły, że jest powszechnie używany. Nadaje się do tworzenia małych i średnich sieci, ponieważ w dość łatwy sposób zaprojektować taką sieć i można obliczyć dokładnie parametry wymagane do prawidłowego działania systemu. W dużych sieciach jest to także możliwe, aczkolwiek nakład pracy wymagany do stworzenia takiej sieci, a następnie jej utrzymanie może być nieopłacalne, a nawet niewykonalne. 
+		Sieci używające protokół MASTER-SLAVE to idealne rozwiązanie dla tych projektantów, którzy lubią mieć dużą kontrole nad wykonywanym projektem. Jej zalety takie jak prostota oraz uniwersalność sprawiły, że jest powszechnie używany. Nadaje się do tworzenia małych i średnich sieci, ponieważ w dość łatwy sposób zaprojektować taką sieć i można obliczyć dokładnie parametry wymagane do prawidłowego działania systemu. W dużych sieciach jest to także możliwe, aczkolwiek nakład pracy wymagany do stworzenia takiej sieci, a następnie jej utrzymanie może być nieopłacalne, a nawet niewykonalne.
+		\\
+		
 		
