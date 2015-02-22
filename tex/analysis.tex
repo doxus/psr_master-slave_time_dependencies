@@ -1,4 +1,4 @@
-\section{Podstawowe parametry czasowe {\Huge SPRAWDZIĆ POPRAWNOŚĆ CYKLU WYMIAN}}
+\section{Podstawowe parametry czasowe}
 Podstawowym parametrem jest długość trwania tzw. \textit{cyklu wymian} czyli odcinka czasu, na którym pojawią się wszystkie wymiany konieczne dla sprawnego działania systemu. Jest on zazwyczaj ograniczony od góry wymaganiami czasowymi, jakie musi spełniać system aby kwalifikował się jako system czasu rzeczywistego.\\
 W \textit{cyklu sieci} wyróżnić można pojedyncze \textit{wymiany}, które należą zazwyczaj do jednej z następujących kategorii:
 \begin{itemize}
@@ -18,8 +18,8 @@ W \textit{cyklu sieci} wyróżnić można pojedyncze \textit{wymiany}, które na
 	\\
 	Przeanalizujmy co się dzieje w ciągu pojedynczej wymiany i jakie opóźnienia czasowe tam występują.\\
 	Przede wszystkim jednostka centralna stacji master przekazuje do koprocesora informacje jakie żądanie musi zostać zrealizowane. Po zakończeniu cyklu automatu master musi zostać przygotowana ramka żądania, bo przecież abonent docelowy musi zostać zaadresowany, należy zapewnić kontrolę poprawności danych sumą CRC itp. Określimy ten czas jako $ T_{PZ} $. \\
-	Przygotowaną ramkę, należy przesłać łączem fizycznym do abonenta docelowego - czas przesyłu jest bezpośrednio związany z właściwością łącza i ustaloną prędkością transmisji danych. Czas propagacji danych po łączu określimy jako $ T_{TRANS1} $. Po wysłaniu ramki przez stację master, koprocesor docelowej stacji slave musi wykryć tą ramkę, i odczytać jej adres, bo przecież wcale nie musi być celem transmisji - jest to czas detekcji ramki $ T_{DZ} $. Po ustaleniu przez koprocesor, że przesłane żądanie ma być zrealizowane, należy żądanie przeanalizować, i poinformować jednostkę centralną jakie działania ma podjąć, bądź też jakie dane przygotować do transmisji - określmy ten czas jako $ T_{AZ} $. Po przekazaniu danych do jednostki centralnej musi się wykonać cykl automatu stacji slave, w którym dane zostaną przygotowane do transmisji do mastera, bądź zostanie wykonana czynność nakazana w otrzymanym żądaniu - czas cyklu można określić jako $ T_{CS} $. 
-	\\Po cyklu automatu następuje jakby "odwrócenie" procesu - stacja slave przygotowuje ramkę odpowiedzi, a master będzie ją odbierał. W skład tego procesu wejdą następujące czasy: czas przygotowania ramki odpowiedzi - $ T_{PO} $, czas transmisji ramki odpowiedzi - $ T_{TRANS2} $, czas detekcji ramki odpowiedzi - $ T_{DO} $, czas analizy ramki odpowiedzi - $ T_{AO} $ i wreszcie czas cyklu automatu stacji master, w którym nastąpi przetworzenie odpowiedzi oraz zapisanie informacji o wymianie zakończonej sukcesem do raportu - $ T_{CM} $.\\
+	Przygotowaną ramkę, należy przesłać łączem fizycznym do abonenta docelowego - czas przesyłu jest bezpośrednio związany z właściwością łącza i ustaloną prędkością transmisji danych. Czas propagacji danych po łączu określimy jako $ T_{TRZ} $. Po wysłaniu ramki przez stację master, koprocesor docelowej stacji slave musi wykryć tą ramkę, i odczytać jej adres, bo przecież wcale nie musi być celem transmisji - jest to czas detekcji ramki $ T_{DZ} $. Po ustaleniu przez koprocesor, że przesłane żądanie ma być zrealizowane, należy żądanie przeanalizować, i poinformować jednostkę centralną jakie działania ma podjąć, bądź też jakie dane przygotować do transmisji - określmy ten czas jako $ T_{AZ} $. Po przekazaniu danych do jednostki centralnej musi się wykonać cykl automatu stacji slave, w którym dane zostaną przygotowane do transmisji do mastera, bądź zostanie wykonana czynność nakazana w otrzymanym żądaniu - czas cyklu można określić jako $ T_{CS} $.\\
+	Po cyklu automatu następuje jakby "odwrócenie" procesu - stacja slave przygotowuje ramkę odpowiedzi, a master będzie ją odbierał. W skład tego procesu wejdą następujące czasy: czas przygotowania ramki odpowiedzi - $ T_{PO} $, czas transmisji ramki odpowiedzi - $ T_{TRO} $, czas detekcji ramki odpowiedzi - $ T_{DO} $, czas analizy ramki odpowiedzi - $ T_{AO} $ i wreszcie czas cyklu automatu stacji master, w którym nastąpi przetworzenie odpowiedzi oraz zapisanie informacji o wymianie zakończonej sukcesem do raportu - $ T_{CM} $.\\
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=0.7\textwidth]{./img/wymiana.jpg}
@@ -30,38 +30,53 @@ W \textit{cyklu sieci} wyróżnić można pojedyncze \textit{wymiany}, które na
 	Warto pamiętać, że dla poprawnej pracy sieci powinny zachodzić następujące zależności:
 	\begin{equation}
 		\label{eq:zalTgot}
-		T_{GOT} > T_{DET1} + T_{AZ} + T_{CS} + T_{PO}
+		T_{GOT} > T_{DZ} + T_{AZ} + T_{CS} + T_{PO}
 	\end{equation}
 	\begin{equation}
 		\label{eq:zalToodp}
-		T_{OODP} > T_{PZ} + T_{TRANS1} + T_{DET1} + T_{AZ} + T_{CS} + T_{PO} + T_{TRANS2} + T_{DO}
+		T_{OODP} > T_{PZ} + T_{TRZ} + T_{DZ} + T_{AZ} + T_{CS} + T_{PO} + T_{TRO} + T_{DO}
 	\end{equation}
 	Warto zwrócić uwagę na fakt, że w przypadku braku sygnału \textit{końca cyklu $ KC $} w czasie $ T_{GOT} $ koprocesor stacji slave wyśle odpowiedź $ NACK $ powodując uznanie wymiany za nieudaną. Jest to o tyle ważne, że wpływ na to ma czas trwania cyklu automatu slave $ T_{CS} $, którego długości nie da się wyliczyć, a jedynie zmierzyć. Dodatkowo będzie ona się prawdopodobnie zmieniała w zależności od działań podejmowanych przez stację slave, przez co może się drastycznie zmienić w wyniku komunikatów nadanych przez sieć. Takie zdarzenie może zaburzyć działanie sieci - dlatego należy doliczyć pewien margines w stosunku do przewidywanego najdłuższego czasu cyklu.
+	
+	\subsection{Analiza czasu trwania cyklu wymian}
+	Na początek warto policzyć, ile czasu zajmie transmisja ramki przez łącze. Jest to dość proste, bo jest to stosunek liczby bitów w ramce do prędkości transmisji. Jedyne o czym należy pamiętać, to narzut bitów sterujących z protokołu.\\
+	Czas transmisji ramki żądania:
 	\begin{equation}
 		\label{eq:czasTrz}
-		T_{TR} = \frac{ZT*BT + BS}{P_{TR}}
+		T_{TRZ} = \frac{ZTZ*BZ + BS}{V[b/s]}
 	\end{equation}
+	Czas transmisji ramki odpowiedzi:
 	\begin{equation}
-		\label{eq:czasTz}
-		T_{TZ} = \frac{ZTZ*BZ + BS}{V}
+		\label{eq:czasTro}
+		T_{TRO} = \frac{ZTO*BZ+BS}{V[b/s]}
 	\end{equation}
-	\begin{equation}
-		\label{eq:czasTo}
-		T_{TO} = \frac{ZTO*BZ+BS}{V}
-	\end{equation}
+	Gdzie: $ ZTZ, ZTO $ to odpowiednio liczba znaków w danych w ramce żądania i odpowiedzi, $ BZ $ to liczba bitów w znaku, $ BS $ to liczba bitów sterujących narzucanych przez protokół (np. CRC itp.), a $ V $ to prędkość transmisji po łączu, wyrażana w $ bitach/sek $.\\
+	\\
+	Znając już czasy poszczególnych transmisji, można się zabrać za wyliczenie już bardziej złożonych rzeczy, jak choćby czasu trwania pojedynczej wymiany - jak łatwo się domyślić będzie to suma wszystkich składowych czasowych:
 	\begin{equation}
 		\label{eq:czasPW}
-		T_{WI} = T_{PZ}+T_{TRANS1} + T_{DZ} + T_{AZ} + T_{CS} + T_{PO} + T_{TRANS2} + T_{DO} + T_{AD} + T_{CM}
+		T_{WYMP} = T_{PZ}+T_{TRZ} + T_{DZ} + T_{AZ} + T_{CS} + T_{PO} + T_{TRO} + T_{DO} + T_{AD} + T_{CM}
 	\end{equation}
+	Warto zwrócić uwagę, na fakt, że bardzo duży wpływ na czas trwania takiej wymiany mają cykle automatów mastera jak i slave'a. Dodatkowo są to parametry, które można zmienić w sposób dość prosty, gdyż nie wymaga to zmiany sprzętu. Natomiast zmiany parametrów detekcji ramki, czy analizy żądania bądź przygotowania odpowiedzi, są już zależne od użytego koprocesora i ich skrócenie wiązałoby się z koniecznością wymiany sprzętu.\\
+	\\
+	Kolejnym parametrem, który można sobie prosto wyliczyć jest czas trwania wszystkich $ N $ wymian:
 	\begin{equation}
 		\label{eq:czasWW}
-		T_{WC} = \sum\limits_{i=1}^N T_{WIi} = \sum\limits_{i=1}^N (T_{PZi} + T_{TRANS1i}) + \sum\limits_{j=1}^N ( + T_{AZj} + T_{CSj} + T_{POj} + T_{TRANS2j}) + \sum\limits_{i=1}^N (T_{CMi}+T_{T_{AOi}} + 2NT_{DO}
+		T_{WYMC} = \sum\limits_{i=1}^N (T_{PZi} + T_{TRZi}) + \sum\limits_{j=1}^N (T_{AZj} + T_{CSj} + T_{POj} + T_{TROj}) + \sum\limits_{i=1}^N (T_{CMi}+T_{T_{AOi}}) + N(T_{DZ} + T_{DO})
 	\end{equation}
+	Należy mieć na względzie, że wyliczone wyżej wartości zakładają brak jakichkolwiek retransmisji, usunięć z sieci stacji itd. Czas wykrycia niedostępności pojedynczego abonenta wynosi:
 	\begin{equation}
-		\label{eq:czasPO}
-		T_{POW} = \sum\limits_{i=1}^N L_{Ri}*T_{TRANS1i} + L_{A}T_{ODDP}
+		\label{eq:czasNiedost}
+		T_{NA} = \sum\limits_{i=1}^{L_{REP}}(T_{TRZ} + T_{OODP})
 	\end{equation}
+	Jak widać, jest to czas powtórzenia $ L_{REP} $ razy transmisji wraz z oczekiwaniem na odpowiedź. Po upływie takiego czasu, stacja master uzna abonenta za niedostępnego i ponowi próbę komunikacji po wykonaniu się $ L_{COCZK} $ cykli sieci.\\
+%	\begin{equation}
+%		\label{eq:czasPO}
+%		T_{POW} = \sum\limits_{i=1}^N L_{Ri}*T_{TRZi} + L_{Ri}T_{ODDP}
+%	\end{equation}
+	\\
+	W najgorszym przypadku czas wszystkich transmisji będzie równy czasowi wszystkich transmisji + maksymalnemu czasowi repetycji, czyli:
 	\begin{equation}
 		\label{eq:czasMAX}
-		T_{WM} = T_{WC} + T_{POW}
+		T_{WYMMAX} = T_{WYMC} + \sum\limits_{i=1}^N T_{NAi}
 	\end{equation}
